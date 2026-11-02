@@ -26,6 +26,22 @@ function motif(kind, color) {
   return `background-color:${color};background-image:url("data:image/svg+xml,${encodeURIComponent(svg)}");background-size:40px 40px`;
 }
 
+// Map of India with one pin per art-form centre. Skips quietly if Leaflet failed to load.
+function makeMap(el, arts, opts = {}) {
+  if (!window.L) { el.innerHTML = '<p class="empty">The map could not be loaded. Check your connection.</p>'; return null; }
+  const map = L.map(el, {scrollWheelZoom: false}).setView([22.5, 79], 4.4);
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {maxZoom: 12, attribution: "&copy; OpenStreetMap contributors"}).addTo(map);
+  const pts = [];
+  arts.forEach(a => (PINS[a.id] || []).forEach(([lat, lng, label]) => {
+    const icon = L.divIcon({className: "", html: `<div class="pin" style="background:${a.color}"></div>`, iconSize: [18, 18]});
+    const link = opts.noLink ? "" : `<br><a href="#/art/${a.id}">Read the story →</a>`;
+    L.marker([lat, lng], {icon, title: a.name}).addTo(map).bindPopup(`<b>${esc(a.name)}</b><br>${esc(label)}, ${esc(a.state)}${link}`);
+    pts.push([lat, lng]);
+  }));
+  if (opts.fit && pts.length) map.fitBounds(pts, {padding: [40, 40], maxZoom: 8});
+  return map;
+}
+
 function home() {
   const states = [...new Set(ARTS.flatMap(a => a.state.split(" · ")))].sort();
   app.innerHTML = `
@@ -37,13 +53,18 @@ function home() {
     <input id="q" type="search" placeholder="Search art forms, places, themes…" aria-label="Search">
     <select id="st" aria-label="Filter by state"><option value="">All states</option>${states.map(s => `<option>${esc(s)}</option>`).join("")}</select>
   </div>
+  <div id="map" class="map" role="region" aria-label="Map of India showing where each art form comes from"></div>
+  <p class="mapnote">Pins show where each art form is centred. Tap a pin to open its story.</p>
   <div class="grid" id="grid"></div>`;
+  let map = null;
   const draw = () => {
     const q = document.getElementById("q").value.toLowerCase();
     const st = document.getElementById("st").value;
     const list = ARTS.filter(a =>
       (!st || a.state.includes(st)) &&
       (!q || JSON.stringify(a).toLowerCase().includes(q)));
+    if (map) map.remove();
+    map = makeMap(document.getElementById("map"), list, {fit: list.length < ARTS.length});
     document.getElementById("grid").innerHTML = list.length ? list.map(a => `
       <a class="card" href="#/art/${a.id}">
         <div class="art" style='${motif(a.motif, a.color)}'></div>
@@ -78,6 +99,13 @@ function detail(id) {
   <nav class="subnav">${SECTIONS.map(([k, t]) => `<a href="#/art/${a.id}" data-go="${k}">${t}</a>`).join("")}</nav>
   ${SECTIONS.map(([k, t], n) => `<section class="story" id="${k}"><div class="kicker">${n + 1} of 5</div><h2>${t}</h2>${body(k, a)}</section>`).join("")}
   <div class="pager"><a href="#/art/${prev.id}">← ${esc(prev.name)}</a><a href="#/art/${next.id}">${esc(next.name)} →</a></div>`;
+  const holder = document.getElementById("place");
+  const mapEl = document.createElement("div");
+  mapEl.className = "map mini";
+  mapEl.setAttribute("role", "region");
+  mapEl.setAttribute("aria-label", `Map showing where ${a.name} comes from`);
+  holder.querySelector("h2").after(mapEl);
+  makeMap(mapEl, [a], {fit: true, noLink: true});
   app.querySelectorAll("[data-go]").forEach(l => l.onclick = e => {
     e.preventDefault();
     document.getElementById(l.dataset.go).scrollIntoView({behavior: "smooth"});

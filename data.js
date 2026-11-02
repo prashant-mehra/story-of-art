@@ -189,3 +189,17 @@ window.ARTS = [
          "Differentiate genuine pieces with maker tags."]
 }
 ];
+
+// Map pins per art form: [latitude, longitude, label]. Some art forms have several centres.
+window.PINS = {
+  madhubani:   [[26.35, 86.07, "Madhubani"]],
+  warli:       [[19.97, 72.73, "Dahanu"]],
+  pattachitra: [[19.89, 85.86, "Raghurajpur"]],
+  kalamkari:   [[13.75, 79.70, "Srikalahasti"], [16.19, 81.14, "Machilipatnam"]],
+  tanjore:     [[10.79, 79.14, "Thanjavur"]],
+  gond:        [[22.94, 81.08, "Dindori"]],
+  phad:        [[25.35, 74.63, "Bhilwara"], [25.63, 74.93, "Shahpura"]],
+  pichwai:     [[24.93, 73.82, "Nathdwara"]],
+  bidri:       [[17.91, 77.52, "Bidar"]],
+  dhokra:      [[19.07, 82.02, "Bastar"]]
+};

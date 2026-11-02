@@ -50,3 +50,10 @@ section.story .kicker{font:.75rem system-ui,sans-serif;letter-spacing:1.5px;text
 .pager a{color:var(--accent)}
 footer{border-top:1px solid var(--line);padding:22px 24px;text-align:center;color:var(--muted);font:.85rem system-ui,sans-serif}
 .note{font:.85rem system-ui,sans-serif;color:var(--muted);border:1px dashed var(--line);padding:10px 14px;border-radius:8px}
+
+.map{height:420px;border:1px solid var(--line);border-radius:14px;margin:0 0 26px;z-index:0}
+.map.mini{height:280px;margin:14px 0}
+.pin{width:18px;height:18px;border-radius:50%;border:3px solid #fff;box-shadow:0 1px 5px rgba(0,0,0,.5)}
+.leaflet-popup-content{font:.95rem system-ui,sans-serif}
+.leaflet-popup-content a{color:var(--accent);font-weight:600}
+.mapnote{font:.78rem system-ui,sans-serif;color:var(--muted);margin:-18px 0 26px}
