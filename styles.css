@@ -57,3 +57,10 @@ footer{border-top:1px solid var(--line);padding:22px 24px;text-align:center;colo
 .leaflet-popup-content{font:.95rem system-ui,sans-serif}
 .leaflet-popup-content a{color:var(--accent);font-weight:600}
 .mapnote{font:.78rem system-ui,sans-serif;color:var(--muted);margin:-18px 0 26px}
+
+figure.photo{margin:14px 0 18px}
+figure.photo img{display:block;width:100%;max-height:420px;object-fit:cover;border-radius:12px;background:var(--line)}
+figure.photo.artist img{max-width:340px;max-height:none;aspect-ratio:4/5}
+figcaption{font:.85rem system-ui,sans-serif;color:var(--muted);margin-top:6px}
+figcaption small{display:block;font-size:.75rem}
+figcaption a{color:var(--accent)}

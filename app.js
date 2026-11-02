@@ -76,6 +76,14 @@ function home() {
   draw();
 }
 
+// Photo with a visible credit line. Returns "" when no image has been added yet.
+function figure(id, kind, caption) {
+  const im = (window.IMAGES[id] || {})[kind];
+  if (!im) return "";
+  return `<figure class="photo ${kind}"><img src="${esc(im.src)}" alt="${esc(im.alt)}" loading="lazy">
+    <figcaption>${esc(caption)}${im.caption ? " " + esc(im.caption) : ""} <small>Photo: ${esc(im.author || "Unknown")} · <a href="${esc(im.page)}" target="_blank" rel="noopener">${esc(im.license)}</a></small></figcaption></figure>`;
+}
+
 function body(key, a) {
   if (key === "history") {
     return `<ul class="timeline">${a.history.map(([when, what]) => `<li><b>${esc(when)}</b>${esc(what)}</li>`).join("")}</ul>`;
@@ -83,7 +91,8 @@ function body(key, a) {
   if (key === "future") {
     return `<div class="vision"><h4>What we hope to do</h4><ul>${a.future.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>`;
   }
-  return a[key].map(p => `<p>${esc(p)}</p>`).join("");
+  const extra = key === "art" ? figure(a.id, "art", a.name + ".") : key === "artist" ? figure(a.id, "artist", "") : "";
+  return extra + a[key].map(p => `<p>${esc(p)}</p>`).join("");
 }
 
 function detail(id) {
