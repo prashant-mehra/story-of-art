@@ -4,4 +4,4 @@ A static website on Indian art forms. Each art form is told in five parts: the a
 
 Run locally: `python3 -m http.server` then open http://localhost:8000.
 
-Add an art form by appending an entry to `data.js`.
+Art forms live in `data.js` and `data2.js` (18 so far); map pins are in the `PINS` object; photos are in `images.js`.
