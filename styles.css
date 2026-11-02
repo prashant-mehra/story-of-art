@@ -1,0 +1,52 @@
+:root{--bg:#faf5ea;--ink:#2a211b;--muted:#6b5d52;--card:#fffdf8;--line:#e3d8c3;--accent:#b5412a}
+@media (prefers-color-scheme:dark){:root{--bg:#1c1713;--ink:#f1e8d8;--muted:#b3a593;--card:#262019;--line:#3a3128}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 Georgia,"Times New Roman",serif}
+a{color:inherit}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:16px 24px;border-bottom:1px solid var(--line)}
+.brand{text-decoration:none;font-size:1.4rem;font-weight:700;letter-spacing:.3px}
+.brand span{display:block;font:.75rem system-ui,sans-serif;color:var(--muted);letter-spacing:1px;text-transform:uppercase}
+nav a{font:.9rem system-ui,sans-serif;margin-left:18px;text-decoration:none;color:var(--muted)}
+nav a:hover{color:var(--accent)}
+main{max-width:1060px;margin:0 auto;padding:0 20px 60px}
+.hero{padding:56px 0 28px}
+.hero h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.1;margin:0 0 14px}
+.hero p{max-width:640px;color:var(--muted);font-size:1.1rem}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px;font-family:system-ui,sans-serif}
+.tools input,.tools select{padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:inherit;font-size:.95rem}
+.tools input{flex:1;min-width:200px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:20px}
+.card{display:block;text-decoration:none;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;transition:transform .15s,box-shadow .15s}
+.card:hover,.card:focus-visible{transform:translateY(-3px);box-shadow:0 8px 22px rgba(0,0,0,.12)}
+.card .art{height:130px}
+.card .body{padding:14px 16px 18px}
+.card h3{margin:0 0 2px;font-size:1.25rem}
+.card .where{font:.78rem system-ui,sans-serif;text-transform:uppercase;letter-spacing:1px;color:var(--muted)}
+.card p{margin:8px 0 0;font-size:.95rem;color:var(--muted)}
+.empty{color:var(--muted);padding:30px 0}
+.detail-hero{margin:0 -20px;padding:48px 20px 34px;color:#fff;position:relative}
+.detail-hero .inner{max-width:1060px;margin:0 auto;position:relative}
+.detail-hero h1{font-size:clamp(2rem,5vw,3.2rem);margin:6px 0}
+.detail-hero .where{font:.8rem system-ui,sans-serif;letter-spacing:1.5px;text-transform:uppercase;opacity:.9}
+.detail-hero p{max-width:640px;font-size:1.15rem;margin:8px 0 0}
+.detail-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.55),rgba(0,0,0,.15))}
+.detail-hero .inner{z-index:1}
+.facts{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 0}
+.facts span{font:.8rem system-ui,sans-serif;background:rgba(255,255,255,.18);padding:4px 10px;border-radius:99px}
+.subnav{position:sticky;top:0;z-index:5;display:flex;gap:6px;overflow-x:auto;background:var(--bg);border-bottom:1px solid var(--line);margin:0 -20px;padding:10px 20px;font-family:system-ui,sans-serif}
+.subnav a{white-space:nowrap;text-decoration:none;font-size:.88rem;padding:6px 12px;border-radius:99px;border:1px solid var(--line);color:var(--muted)}
+.subnav a:hover{border-color:var(--accent);color:var(--accent)}
+section.story{padding:34px 0 6px;max-width:740px}
+section.story h2{font-size:1.7rem;margin:0 0 4px}
+section.story .kicker{font:.75rem system-ui,sans-serif;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent)}
+.timeline{list-style:none;padding:0;margin:14px 0;border-left:2px solid var(--line)}
+.timeline li{position:relative;padding:0 0 18px 22px}
+.timeline li::before{content:"";position:absolute;left:-7px;top:8px;width:12px;height:12px;border-radius:50%;background:var(--accent)}
+.timeline b{display:block;font:600 .85rem system-ui,sans-serif;color:var(--accent)}
+.vision{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;padding:14px 18px;margin:12px 0}
+.vision h4{margin:0 0 4px;font:600 .8rem system-ui,sans-serif;letter-spacing:1px;text-transform:uppercase;color:var(--accent)}
+.vision ul{margin:4px 0 0;padding-left:20px}
+.pager{display:flex;justify-content:space-between;gap:12px;margin-top:50px;font-family:system-ui,sans-serif;font-size:.95rem}
+.pager a{color:var(--accent)}
+footer{border-top:1px solid var(--line);padding:22px 24px;text-align:center;color:var(--muted);font:.85rem system-ui,sans-serif}
+.note{font:.85rem system-ui,sans-serif;color:var(--muted);border:1px dashed var(--line);padding:10px 14px;border-radius:8px}
